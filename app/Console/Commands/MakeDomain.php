@@ -33,6 +33,7 @@ class MakeDomain extends Command
         $domainLayers = [
             "Models",
             "Services",
+            "DTO",
             "Repositories",
             "Actions",
             "Rules",

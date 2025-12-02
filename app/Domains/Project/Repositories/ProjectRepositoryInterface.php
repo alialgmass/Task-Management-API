@@ -2,11 +2,11 @@
 
 namespace App\Domains\Project\Repositories;
 
+use App\Domains\Project\Models\Project;
+
 interface ProjectRepositoryInterface
 {
-    public function all();
-    public function find($id);
-    public function create(array $data);
-    public function update($id, array $data);
-    public function delete($id);
+    public function create(Project $project): Project;
+    public function find(int $id): ?Project;
+    public function update(Project $project): Project;
 }

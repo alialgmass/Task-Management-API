@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Domains\Project\Models;
+namespace App\Domains\Project\DTO;
 
-class Project
+class CreateProjectDTO
 {
     public function __construct(
-        public ?int $id,
         public string $name,
         public ?string $description,
     ) {}
