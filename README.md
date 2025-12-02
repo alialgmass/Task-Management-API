@@ -36,7 +36,6 @@ php artisan make:domain Team
 * سهل التوسع لإضافة UseCases جديدة أو Integrations
 * مستقل عن Laravel داخل الـ Domain layer
 
----
 
 
 ## 🔧 **خطط التطوير المستقبلية**
