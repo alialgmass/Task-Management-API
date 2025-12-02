@@ -38,18 +38,7 @@ php artisan make:domain Team
 
 
 
-## 🔧 **خطط التطوير المستقبلية**
 
-* إضافة علاقات بين الدومينات:
-
-    * Project → Tasks
-    * Sprint → Tasks
-    * Team → Projects / Tasks
-* إضافة Authentication / Authorization
-* إضافة Notifications / Events
-* إضافة Jobs / Queues حسب الحاجة
-
----
 
 ## 💻 Author
 
