@@ -1,59 +1,166 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+تمام يا علي، هعمللك **README كامل جاهز للمشروع** يشرح **هيكل DOL + Domains + Layers + CRUD** وكيفية استخدامه.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+# 📄 **README.md**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+```markdown
+# Task Management API - DOL Architecture
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+هذا المشروع عبارة عن **Task Management API** باستخدام **Laravel** مع **Domain-Oriented Layered Architecture (DOL)**.  
+يحتوي على الدومينات التالية:  
+- Project  
+- Task  
+- Sprint  
+- Team  
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🏗️ الهيكل العام للمشروع
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+app/
+├── Domains/
+│    ├── Project/
+│    │     ├── Models/
+│    │     ├── Services/
+│    │     ├── Repositories/
+│    │     ├── Actions/
+│    │     ├── Rules/
+│    │     ├── Jobs/
+│    │     ├── Events/
+│    │     └── Exceptions/
+│    ├── Task/
+│    ├── Sprint/
+│    └── Team/
+│
+├── Infrastructure/
+│    ├── Project/Eloquent/
+│    ├── Task/Eloquent/
+│    ├── Sprint/Eloquent/
+│    └── Team/Eloquent/
+│
+└── Interfaces/Http/
+├── Project/Controllers/
+├── Project/Requests/
+├── Project/Resources/
+├── Task/Controllers/
+└── (Sprint / Team same structure)
 
-## Laravel Sponsors
+````
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 🧩 **شرح الـ Layers**
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 1️⃣ Domain Layer
+- يحتوي على المنطق التجاري فقط.
+- مستقل عن Laravel أو أي framework.
+- يحتوي على:
+  - **Models**: كائنات الدومين (Entities)
+  - **Services**: منطق الأعمال
+  - **Repositories**: Interfaces
+  - **Actions**: Use-case actions
+  - **Rules**: القواعد والتحققات
+  - **Jobs / Events / Exceptions**: عناصر خاصة بالدومين
 
-## Contributing
+### 2️⃣ Infrastructure Layer
+- يحتوي على تنفيذ **Repositories باستخدام Eloquent**.
+- أي تكامل مع قواعد البيانات أو خدمات خارجية.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3️⃣ Interfaces / HTTP Layer
+- Controllers / Requests / Resources
+- يمثل الطبقة التي تتعامل مع Laravel HTTP.
+- لا يحتوي على منطق تجاري.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## ⚡ **طريقة الاستخدام**
 
-## Security Vulnerabilities
+### 1️⃣ تثبيت المشروع
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+````
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 2️⃣ إنشاء Domains
 
-## License
+يمكنك إنشاء دومين جديد باستخدام الـ Artisan Command:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan make:domain Project
+php artisan make:domain Task
+php artisan make:domain Sprint
+php artisan make:domain Team
+```
+
+> سيقوم بإنشاء:
+>
+> * Domain layer
+> * Infrastructure layer (Eloquent Repositories)
+> * HTTP layer (Controller / Request / Resource)
+> * Skeleton CRUD جاهز
+
+### 3️⃣ Routes
+
+* كل دومين له **Controller** جاهز CRUD.
+* مثال في `routes/api.php`:
+
+```php
+use App\Interfaces\Http\Project\Controllers\ProjectController;
+
+Route::apiResource('projects', ProjectController::class);
+```
+
+### 4️⃣ CRUD Operations
+
+* **GET /projects** → قائمة المشاريع
+* **POST /projects** → إنشاء مشروع
+* **GET /projects/{id}** → عرض مشروع
+* **PUT /projects/{id}** → تعديل مشروع
+* **DELETE /projects/{id}** → حذف مشروع
+
+> نفس الشيء لباقي الدومينات (Tasks / Sprint / Team)
+
+---
+
+## 📦 **مميزات المشروع**
+
+* Architecture بسيطة وواضحة (DOL)
+* Layered Separation: Domain, Infrastructure, Interface
+* CRUD Skeleton جاهز لكل Domain
+* سهل التوسع لإضافة UseCases جديدة أو Integrations
+* مستقل عن Laravel داخل الـ Domain layer
+
+---
+
+## 🧪 **اختبار الدومين**
+
+* كل Domain يمكن اختباره بشكل مستقل بدون Laravel.
+* يمكن إنشاء Unit Tests مباشرة على Services / Actions / Rules.
+
+---
+
+## 🔧 **خطط التطوير المستقبلية**
+
+* إضافة علاقات بين الدومينات:
+
+    * Project → Tasks
+    * Sprint → Tasks
+    * Team → Projects / Tasks
+* إضافة Authentication / Authorization
+* إضافة Notifications / Events
+* إضافة Jobs / Queues حسب الحاجة
+
+---
+
+## 💻 Author
+
+* Ali Ehab Algmass
+* Backend Laravel Developer / Software Engineer
+
+```
+
