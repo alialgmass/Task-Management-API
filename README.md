@@ -27,28 +27,6 @@ php artisan make:domain Team
 > * HTTP layer (Controller / Request / Resource)
 > * Skeleton CRUD جاهز
 
-### 3️⃣ Routes
-
-* كل دومين له **Controller** جاهز CRUD.
-* مثال في `routes/api.php`:
-
-```php
-use App\Interfaces\Http\Project\Controllers\ProjectController;
-
-Route::apiResource('projects', ProjectController::class);
-```
-
-### 4️⃣ CRUD Operations
-
-* **GET /projects** → قائمة المشاريع
-* **POST /projects** → إنشاء مشروع
-* **GET /projects/{id}** → عرض مشروع
-* **PUT /projects/{id}** → تعديل مشروع
-* **DELETE /projects/{id}** → حذف مشروع
-
-> نفس الشيء لباقي الدومينات (Tasks / Sprint / Team)
-
----
 
 ## 📦 **مميزات المشروع**
 
@@ -60,12 +38,6 @@ Route::apiResource('projects', ProjectController::class);
 
 ---
 
-## 🧪 **اختبار الدومين**
-
-* كل Domain يمكن اختباره بشكل مستقل بدون Laravel.
-* يمكن إنشاء Unit Tests مباشرة على Services / Actions / Rules.
-
----
 
 ## 🔧 **خطط التطوير المستقبلية**
 
