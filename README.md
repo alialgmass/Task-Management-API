@@ -1,8 +1,3 @@
-تمام يا علي، هعمللك **README كامل جاهز للمشروع** يشرح **هيكل DOL + Domains + Layers + CRUD** وكيفية استخدامه.
-
----
-
-# 📄 **README.md**
 
 ```markdown
 # Task Management API - DOL Architecture
